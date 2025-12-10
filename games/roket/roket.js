@@ -156,9 +156,11 @@ function initGame() {
 }
 
 function resizeCanvas() {
-    const maxWidth = Math.min(CONFIG.WIDTH, window.innerWidth - 40);
+    const container = RoketGame.canvas.parentElement;
+    const containerWidth = container ? container.clientWidth : window.innerWidth - 20;
+    const maxWidth = Math.min(CONFIG.WIDTH, containerWidth);
     const scale = maxWidth / CONFIG.WIDTH;
-    RoketGame.canvas.style.width = `${CONFIG.WIDTH * scale}px`;
+    RoketGame.canvas.style.width = `${maxWidth}px`;
     RoketGame.canvas.style.height = `${CONFIG.HEIGHT * scale}px`;
 }
 

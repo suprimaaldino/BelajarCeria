@@ -321,10 +321,12 @@ function initGame() {
  */
 function resizeCanvas() {
     const container = BalloonGame.canvas.parentElement;
-    const maxWidth = Math.min(CONFIG.CANVAS_WIDTH, window.innerWidth - 40);
+    const containerWidth = container.clientWidth || window.innerWidth - 20;
+    const maxWidth = Math.min(CONFIG.CANVAS_WIDTH, containerWidth);
     const scale = maxWidth / CONFIG.CANVAS_WIDTH;
 
-    BalloonGame.canvas.style.width = `${CONFIG.CANVAS_WIDTH * scale}px`;
+    // Update canvas display size
+    BalloonGame.canvas.style.width = `${maxWidth}px`;
     BalloonGame.canvas.style.height = `${CONFIG.CANVAS_HEIGHT * scale}px`;
 }
 
