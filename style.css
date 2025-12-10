@@ -1,0 +1,1003 @@
+/* =========================================
+   BELAJAR CERIA - Main Stylesheet
+   Educational Games for Children
+   ========================================= */
+
+/* ---------- CSS Variables ---------- */
+:root {
+    /* Primary Colors - Vibrant & Child-Friendly */
+    --primary-purple: #8b5cf6;
+    --primary-pink: #ec4899;
+    --primary-blue: #3b82f6;
+    --primary-cyan: #06b6d4;
+    --primary-green: #10b981;
+    --primary-yellow: #f59e0b;
+    --primary-orange: #f97316;
+    --primary-red: #ef4444;
+
+    /* Gradients */
+    --gradient-rainbow: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --gradient-ocean: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-forest: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    --gradient-candy: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    --gradient-sky: linear-gradient(180deg, #a8edea 0%, #fed6e3 100%);
+
+    /* Background */
+    --bg-main: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffeaa7 100%);
+    --bg-card: rgba(255, 255, 255, 0.95);
+
+    /* Text Colors */
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --shadow-strong: 0 15px 50px rgba(0, 0, 0, 0.15);
+    --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.3);
+
+    /* Border Radius */
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 30px;
+    --radius-xl: 40px;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Font */
+    --font-main: 'Nunito', sans-serif;
+    --font-display: 'Fredoka', sans-serif;
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ---------- Animated Background ---------- */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-shape {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: float 15s ease-in-out infinite;
+}
+
+.shape-1 {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+    font-size: 2.5rem;
+}
+
+.shape-2 {
+    top: 20%;
+    right: 10%;
+    animation-delay: 2s;
+    font-size: 3rem;
+}
+
+.shape-3 {
+    top: 60%;
+    left: 8%;
+    animation-delay: 4s;
+}
+
+.shape-4 {
+    top: 80%;
+    right: 15%;
+    animation-delay: 1s;
+    font-size: 2.2rem;
+}
+
+.shape-5 {
+    top: 40%;
+    left: 85%;
+    animation-delay: 3s;
+}
+
+.shape-6 {
+    top: 70%;
+    left: 50%;
+    animation-delay: 5s;
+}
+
+.shape-7 {
+    top: 15%;
+    left: 40%;
+    animation-delay: 2.5s;
+    font-size: 1.8rem;
+}
+
+.shape-8 {
+    top: 50%;
+    right: 5%;
+    animation-delay: 4.5s;
+    font-size: 2rem;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(-3deg);
+    }
+
+    75% {
+        transform: translateY(-25px) rotate(3deg);
+    }
+}
+
+/* ---------- App Container ---------- */
+.app-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.logo-icon {
+    font-size: 4rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.logo-text {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    display: flex;
+    gap: 10px;
+}
+
+.logo-belajar {
+    background: var(--gradient-ocean);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-ceria {
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tagline {
+    font-size: 1.3rem;
+    color: var(--text-medium);
+    font-weight: 600;
+    animation: fadeIn 1s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ---------- Welcome Section ---------- */
+.welcome-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px;
+    margin-bottom: 40px;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-medium);
+    animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mascot */
+.mascot {
+    flex-shrink: 0;
+}
+
+.mascot-face {
+    width: 120px;
+    height: 120px;
+    background: var(--gradient-candy);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    animation: wiggle 3s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+.mascot-eyes {
+    display: flex;
+    gap: 25px;
+    margin-top: -10px;
+}
+
+.eye {
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pupil {
+    width: 12px;
+    height: 12px;
+    background: #1e293b;
+    border-radius: 50%;
+    animation: lookAround 4s ease-in-out infinite;
+}
+
+@keyframes lookAround {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(3px);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+}
+
+.mascot-mouth {
+    font-size: 2rem;
+    margin-top: 5px;
+}
+
+.welcome-text h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--primary-purple);
+    margin-bottom: 8px;
+}
+
+.welcome-text p {
+    font-size: 1.2rem;
+    color: var(--text-medium);
+}
+
+/* ---------- Games Section ---------- */
+.games-section {
+    padding: 20px 0;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--text-dark);
+}
+
+.title-icon {
+    font-size: 2.2rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Games Grid */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 10px;
+}
+
+/* Game Card */
+.game-card {
+    position: relative;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    animation: cardAppear 0.6s ease-out both;
+}
+
+.game-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.game-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.game-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.game-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.game-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* Card Colors */
+.game-card[data-game="tap"]::before {
+    background: var(--gradient-ocean);
+}
+
+.game-card[data-game="balon"]::before {
+    background: var(--gradient-sunset);
+}
+
+.game-card[data-game="susun"]::before {
+    background: var(--gradient-forest);
+}
+
+.game-card[data-game="hitung"]::before {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.game-card[data-game="roket"]::before {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+    pointer-events: none;
+}
+
+.game-card:hover .card-glow {
+    opacity: 0.3;
+}
+
+.card-content {
+    padding: 30px 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.game-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    display: block;
+    transition: transform var(--transition-medium);
+}
+
+.game-card:hover .game-icon {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.game-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.game-desc {
+    font-size: 1rem;
+    color: var(--text-medium);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.game-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.badge-star {
+    font-size: 1rem;
+}
+
+.card-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.game-card:hover .card-shine {
+    left: 150%;
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-strong);
+}
+
+.game-card:active {
+    transform: translateY(-4px) scale(0.98);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    margin-top: 60px;
+    padding: 30px;
+    text-align: center;
+}
+
+.footer-content p {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin-bottom: 15px;
+}
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.5rem;
+}
+
+.footer-icons span {
+    animation: float 3s ease-in-out infinite;
+}
+
+.footer-icons span:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.footer-icons span:nth-child(3) {
+    animation-delay: 1s;
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+    .logo-text {
+        font-size: 2.5rem;
+    }
+
+    .logo-icon {
+        font-size: 3rem;
+    }
+
+    .welcome-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+
+    .mascot-face {
+        width: 100px;
+        height: 100px;
+    }
+
+    .welcome-text h2 {
+        font-size: 1.6rem;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-container {
+        padding: 15px;
+    }
+
+    .header {
+        padding: 25px 15px;
+    }
+
+    .logo-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo-text {
+        font-size: 2rem;
+    }
+
+    .tagline {
+        font-size: 1.1rem;
+    }
+
+    .card-content {
+        padding: 25px 20px;
+    }
+
+    .game-icon {
+        font-size: 3rem;
+    }
+
+    .game-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* ---------- Utility Classes ---------- */
+.hidden {
+    display: none !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* ---------- Game Page Common Styles ---------- */
+.game-container {
+    min-height: 100vh;
+    background: var(--bg-main);
+    padding: 20px;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-soft);
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--gradient-ocean);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.game-title-header {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.game-canvas {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-strong);
+    background: white;
+    max-width: 100%;
+    touch-action: none;
+}
+
+.instruction-box {
+    text-align: center;
+    padding: 20px 30px;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: var(--shadow-soft);
+}
+
+.instruction-text {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--primary-purple);
+}
+
+.instruction-target {
+    font-size: 3rem;
+    display: inline-block;
+    margin-left: 15px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ---------- Game Page Responsive ---------- */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 12px;
+    }
+
+    .game-header {
+        padding: 12px 15px;
+        border-radius: 18px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .back-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .back-btn span:last-child {
+        display: none;
+    }
+
+    .game-title-header {
+        font-size: 1.3rem;
+        gap: 6px;
+    }
+
+    .game-title-header span:first-child {
+        font-size: 1.5rem;
+    }
+
+    .score-display {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+
+    .instruction-box {
+        padding: 15px 20px;
+        margin: 15px auto;
+    }
+
+    .instruction-text {
+        font-size: 1.4rem;
+    }
+
+    .instruction-target {
+        font-size: 2.2rem;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 8px;
+    }
+
+    .game-header {
+        padding: 10px 12px;
+        border-radius: 15px;
+    }
+
+    .back-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .game-title-header {
+        font-size: 1.1rem;
+        gap: 5px;
+    }
+
+    .score-display {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .instruction-box {
+        padding: 12px 15px;
+        margin: 10px auto;
+    }
+
+    .instruction-text {
+        font-size: 1.2rem;
+    }
+
+    .instruction-target {
+        font-size: 1.8rem;
+        margin-left: 8px;
+    }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-medium);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: var(--radius-xl);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.8);
+    transition: transform var(--transition-medium);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--primary-purple);
+    margin-bottom: 10px;
+}
+
+.modal-text {
+    font-size: 1.2rem;
+    color: var(--text-medium);
+    margin-bottom: 25px;
+}
+
+.modal-btn {
+    padding: 15px 40px;
+    background: var(--gradient-sunset);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.modal-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+/* ---------- PWA Install Button ---------- */
+.install-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    animation: slideUp 0.5s ease-out;
+}
+
+.install-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+    transition: all var(--transition-fast);
+}
+
+.install-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5);
+}
+
+.install-btn:active {
+    transform: scale(0.98);
+}

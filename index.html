@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description"
+        content="Belajar Ceria - Aplikasi edukasi menyenangkan untuk anak-anak belajar membaca dan berhitung">
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Belajar Ceria">
+    <title>Belajar Ceria 🎮 - Belajar Sambil Bermain</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shape shape-1">🌟</div>
+        <div class="floating-shape shape-2">🎈</div>
+        <div class="floating-shape shape-3">🦋</div>
+        <div class="floating-shape shape-4">🌈</div>
+        <div class="floating-shape shape-5">✨</div>
+        <div class="floating-shape shape-6">🎀</div>
+        <div class="floating-shape shape-7">🌸</div>
+        <div class="floating-shape shape-8">💫</div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo-icon">📚</div>
+                <h1 class="logo-text">
+                    <span class="logo-belajar">Belajar</span>
+                    <span class="logo-ceria">Ceria</span>
+                </h1>
+            </div>
+            <p class="tagline">✨ Belajar Sambil Bermain ✨</p>
+        </header>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="mascot">
+                <div class="mascot-face">
+                    <div class="mascot-eyes">
+                        <div class="eye left-eye">
+                            <div class="pupil"></div>
+                        </div>
+                        <div class="eye right-eye">
+                            <div class="pupil"></div>
+                        </div>
+                    </div>
+                    <div class="mascot-mouth">😊</div>
+                </div>
+            </div>
+            <div class="welcome-text">
+                <h2>Hai, Teman! 👋</h2>
+                <p>Pilih permainan seru di bawah ini!</p>
+            </div>
+        </section>
+
+        <!-- Games Grid -->
+        <section class="games-section">
+            <h3 class="section-title">
+                <span class="title-icon">🎮</span>
+                Pilih Permainan
+            </h3>
+
+            <div class="games-grid">
+                <!-- Game 1: Tap Angka/Huruf -->
+                <a href="games/tap/tap.html" class="game-card" data-game="tap">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="game-icon">👆</div>
+                        <h4 class="game-title">Tap Angka & Huruf</h4>
+                        <p class="game-desc">Temukan huruf atau angka yang benar!</p>
+                        <div class="game-badge">
+                            <span class="badge-star">⭐</span>
+                            <span>Mudah</span>
+                        </div>
+                    </div>
+                    <div class="card-shine"></div>
+                </a>
+
+                <!-- Game 2: Balon Huruf -->
+                <a href="games/balon/balon.html" class="game-card" data-game="balon">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="game-icon">🎈</div>
+                        <h4 class="game-title">Balon Huruf</h4>
+                        <p class="game-desc">Pecahkan balon dengan huruf yang tepat!</p>
+                        <div class="game-badge">
+                            <span class="badge-star">⭐</span>
+                            <span>Seru</span>
+                        </div>
+                    </div>
+                    <div class="card-shine"></div>
+                </a>
+
+                <!-- Game 3: Susun Kata -->
+                <a href="games/susun/susun.html" class="game-card" data-game="susun">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="game-icon">🧩</div>
+                        <h4 class="game-title">Susun Kata</h4>
+                        <p class="game-desc">Susun huruf jadi kata yang benar!</p>
+                        <div class="game-badge">
+                            <span class="badge-star">⭐⭐</span>
+                            <span>Menantang</span>
+                        </div>
+                    </div>
+                    <div class="card-shine"></div>
+                </a>
+
+                <!-- Game 4: Hitung Hewan -->
+                <a href="games/hitung/hitung.html" class="game-card" data-game="hitung">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="game-icon">🐾</div>
+                        <h4 class="game-title">Hitung Hewan</h4>
+                        <p class="game-desc">Hitung berapa jumlah hewannya!</p>
+                        <div class="game-badge">
+                            <span class="badge-star">⭐</span>
+                            <span>Mudah</span>
+                        </div>
+                    </div>
+                    <div class="card-shine"></div>
+                </a>
+
+                <!-- Game 5: Roket Antigravity -->
+                <a href="games/roket/roket.html" class="game-card" data-game="roket">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="game-icon">🚀</div>
+                        <h4 class="game-title">Roket Antigravity</h4>
+                        <p class="game-desc">Terbang dan kumpulkan jawaban benar!</p>
+                        <div class="game-badge">
+                            <span class="badge-star">⭐⭐⭐</span>
+                            <span>Petualangan</span>
+                        </div>
+                    </div>
+                    <div class="card-shine"></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Install Button (PWA) -->
+        <div id="installContainer" class="install-container" style="display: none;">
+            <button id="installBtn" class="install-btn">
+                <span>📲</span>
+                <span>Install Aplikasi</span>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Dibuat dengan ❤️ untuk Anak Indonesia</p>
+                <div class="footer-icons">
+                    <span>🌟</span>
+                    <span>📚</span>
+                    <span>🎨</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+                    .catch(err => console.error('❌ SW registration failed:', err));
+            });
+        }
+    </script>
+</body>
+
+</html>

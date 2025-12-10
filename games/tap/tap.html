@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Tap Angka & Huruf - Temukan huruf atau angka yang benar!">
+    <title>Tap Angka & Huruf 👆 - Belajar Ceria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* Game-specific styles */
+        .tap-game-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .options-container {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .option-btn {
+            width: 140px;
+            height: 140px;
+            border-radius: 25px;
+            border: none;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .option-btn:hover::before {
+            left: 100%;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        .option-btn:active {
+            transform: scale(0.95);
+        }
+
+        .option-btn.correct-animation {
+            animation: correctPulse 0.6s ease;
+            background: linear-gradient(135deg, #10b981, #34d399) !important;
+        }
+
+        .option-btn.wrong-animation {
+            animation: wrongShake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes wrongShake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-10px);
+            }
+
+            40% {
+                transform: translateX(10px);
+            }
+
+            60% {
+                transform: translateX(-10px);
+            }
+
+            80% {
+                transform: translateX(10px);
+            }
+        }
+
+        .option-btn.opt-1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .option-btn.opt-2 {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .option-btn.opt-3 {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .option-btn.opt-4 {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 3px solid transparent;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+            color: #475569;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .mode-btn:hover:not(.active) {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .streak-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            border-radius: 50px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .feedback-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .feedback-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 5rem;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .feedback-text.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .feedback-text.correct {
+            color: #10b981;
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        }
+
+        .feedback-text.wrong {
+            color: #ef4444;
+            text-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .option-btn {
+                width: calc(40vw - 20px);
+                height: calc(40vw - 20px);
+                max-width: 120px;
+                max-height: 120px;
+                font-size: clamp(2rem, 10vw, 3.5rem);
+                border-radius: 20px;
+            }
+
+            .options-container {
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .mode-selector {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .mode-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .streak-display {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .feedback-text {
+                font-size: 3rem;
+            }
+
+            .instruction-text {
+                font-size: 1.3rem;
+            }
+
+            .instruction-target {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .option-btn {
+                width: calc(42vw - 15px);
+                height: calc(42vw - 15px);
+                font-size: clamp(1.8rem, 12vw, 3rem);
+            }
+
+            .tap-game-area {
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .mode-btn {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shape shape-1">✨</div>
+        <div class="floating-shape shape-2">🌟</div>
+        <div class="floating-shape shape-3">💫</div>
+        <div class="floating-shape shape-4">⭐</div>
+    </div>
+
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <a href="../../index.html" class="back-btn">
+                <span>←</span>
+                <span>Kembali</span>
+            </a>
+            <h1 class="game-title-header">
+                <span>👆</span>
+                <span>Tap Angka & Huruf</span>
+            </h1>
+            <div class="score-display">
+                <span>⭐</span>
+                <span id="score">0</span>
+            </div>
+        </header>
+
+        <!-- Mode Selector -->
+        <div style="display: flex; justify-content: center; margin: 20px 0;">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="letters">🔤 Huruf</button>
+                <button class="mode-btn" data-mode="numbers">🔢 Angka</button>
+                <button class="mode-btn" data-mode="mixed">🎲 Campur</button>
+            </div>
+        </div>
+
+        <!-- Instruction -->
+        <div class="instruction-box">
+            <p class="instruction-text">
+                Cari: <span id="target" class="instruction-target">A</span>
+            </p>
+        </div>
+
+        <!-- Game Area -->
+        <div class="tap-game-area">
+            <div class="streak-display">
+                <span>🔥</span>
+                <span>Streak: </span>
+                <span id="streak">0</span>
+            </div>
+
+            <div class="options-container" id="options">
+                <!-- Options will be generated by JS -->
+            </div>
+        </div>
+
+        <!-- Feedback Overlay -->
+        <div class="feedback-overlay">
+            <div id="feedback" class="feedback-text"></div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" id="successModal">
+            <div class="modal-content">
+                <div class="modal-icon">🎉</div>
+                <h2 class="modal-title">Hebat!</h2>
+                <p class="modal-text">Kamu sudah menjawab <span id="finalScore">0</span> dengan benar!</p>
+                <button class="modal-btn" onclick="closeModal()">Main Lagi! 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="tap.js"></script>
+</body>
+
+</html>
