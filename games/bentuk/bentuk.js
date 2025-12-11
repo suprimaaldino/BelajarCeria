@@ -199,8 +199,8 @@ function handleTouchStart(e) {
     touchClone.style.pointerEvents = 'none';
     touchClone.style.zIndex = '9999';
     touchClone.style.opacity = '0.8';
-    touchClone.style.left = touch.clientX - 40 + 'px';
-    touchClone.style.top = touch.clientY - 40 + 'px';
+    touchClone.style.left = (touch.clientX - 40) + 'px'; // Center 80px element
+    touchClone.style.top = (touch.clientY - 40) + 'px';
     document.body.appendChild(touchClone);
 
     touchElement.style.opacity = '0.3';
@@ -219,7 +219,15 @@ function handleTouchEnd(e) {
     if (!touchClone) return;
 
     const touch = e.changedTouches[0];
-    const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+    // Hide clone briefly to detect element underneath
+    touchClone.style.display = 'none';
+    let dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+    touchClone.style.display = 'block';
+
+    // Traverse up to find target-slot if we hit an inner element (like the outline svg)
+    while (dropTarget && !dropTarget.classList.contains('target-slot')) {
+        dropTarget = dropTarget.parentElement;
+    }
 
     if (dropTarget && dropTarget.classList.contains('target-slot')) {
         const draggedShape = touchElement.dataset.shape;
