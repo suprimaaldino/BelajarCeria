@@ -324,7 +324,7 @@ function resizeCanvas() {
     const containerWidth = container.clientWidth || window.innerWidth - 20;
 
     // Calculate available height
-    const availableHeight = Math.max(300, window.innerHeight - 200);
+    const availableHeight = window.innerHeight - headerHeight - statsHeight - 180;
 
     // Calculate dimensions maintaining aspect ratio
     const aspectRatio = CONFIG.CANVAS_WIDTH / CONFIG.CANVAS_HEIGHT;

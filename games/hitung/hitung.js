@@ -115,7 +115,7 @@ function spawnAnimal(arena, emoji, delay) {
     const rect = arena.getBoundingClientRect();
     const padding = 50;
     const x = padding + Math.random() * (rect.width - padding * 2 - 60);
-    const y = 30 + Math.random() * (rect.height - 150);
+    const y = 30 + Math.random() * (rect.height - 100);
 
     animal.style.left = `${x}px`;
     animal.style.top = `${y}px`;

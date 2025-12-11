@@ -157,11 +157,31 @@ function initGame() {
 
 function resizeCanvas() {
     const container = RoketGame.canvas.parentElement;
-    const containerWidth = container ? container.clientWidth : window.innerWidth - 20;
-    const maxWidth = Math.min(CONFIG.WIDTH, containerWidth);
-    const scale = maxWidth / CONFIG.WIDTH;
-    RoketGame.canvas.style.width = `${maxWidth}px`;
-    RoketGame.canvas.style.height = `${CONFIG.HEIGHT * scale}px`;
+    const width = container.clientWidth;
+    const height = window.innerHeight - 100; // Increased height
+
+    // Calculate aspect ratio of the game world (CONFIG.WIDTH / CONFIG.HEIGHT)
+    const gameAspectRatio = CONFIG.WIDTH / CONFIG.HEIGHT;
+
+    let newCanvasWidth = width;
+    let newCanvasHeight = height;
+
+    // Adjust dimensions to maintain aspect ratio
+    if (newCanvasWidth / newCanvasHeight > gameAspectRatio) {
+        newCanvasWidth = newCanvasHeight * gameAspectRatio;
+    } else {
+        newCanvasHeight = newCanvasWidth / gameAspectRatio;
+    }
+
+    RoketGame.canvas.style.width = `${newCanvasWidth}px`;
+    RoketGame.canvas.style.height = `${newCanvasHeight}px`;
+
+    // Set internal canvas resolution to CONFIG values for consistent drawing
+    RoketGame.canvas.width = CONFIG.WIDTH;
+    RoketGame.canvas.height = CONFIG.HEIGHT;
+
+    // Calculate scale for drawing if needed, though CSS scaling handles visual size
+    RoketGame.scale = Math.min(newCanvasWidth / CONFIG.WIDTH, newCanvasHeight / CONFIG.HEIGHT);
 }
 
 function handleThrust() {
