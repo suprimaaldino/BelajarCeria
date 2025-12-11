@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Tebak Warna 🎨 - Belajar Ceria</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .warna-game-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .color-display {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            animation: colorPop 0.5s ease;
+        }
+
+        @keyframes colorPop {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .question-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.5rem;
+            color: #1e293b;
+            text-align: center;
+        }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+        }
+
+        .color-btn {
+            padding: 18px 25px;
+            border-radius: 20px;
+            border: 4px solid transparent;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .color-btn.correct {
+            border-color: #10b981;
+            animation: correctPulse 0.5s ease;
+        }
+
+        .color-btn.wrong {
+            border-color: #ef4444;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes correctPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        .stat-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: white;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 0 8px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 480px) {
+            .color-display {
+                width: 150px;
+                height: 150px;
+                font-size: 4rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .color-btn {
+                padding: 14px 18px;
+                font-size: 1rem;
+            }
+
+            .color-options {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="floating-shape shape-1">🎨</div>
+        <div class="floating-shape shape-2">🌈</div>
+    </div>
+
+    <div class="game-container">
+        <header class="game-header">
+            <a href="../../index.html" class="back-btn"><span>←</span><span>Kembali</span></a>
+            <h1 class="game-title-header"><span>🎨</span><span>Tebak Warna</span></h1>
+            <div class="score-display"><span>⭐</span><span id="score">0</span></div>
+        </header>
+
+        <div class="warna-game-area">
+            <div style="display:flex;gap:12px;">
+                <div class="stat-box"><span>❤️</span>Nyawa: <span id="lives">3</span></div>
+                <div class="stat-box"><span>📊</span>Level: <span id="level">1</span></div>
+            </div>
+
+            <div class="color-display" id="colorDisplay"></div>
+
+            <p class="question-text">Warna apa ini?</p>
+
+            <div class="color-options" id="colorOptions"></div>
+        </div>
+
+        <div class="modal-overlay" id="gameOverModal">
+            <div class="modal-content">
+                <div class="modal-icon">🎨</div>
+                <h2 class="modal-title" id="modalTitle">Game Over!</h2>
+                <p class="modal-text">Skor Akhir: <span id="finalScore">0</span></p>
+                <button class="modal-btn" id="restartBtn">Main Lagi!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="warna.js"></script>
+</body>
+
+</html>
