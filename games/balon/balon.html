@@ -14,16 +14,31 @@
     <link rel="stylesheet" href="../../style.css">
     <style>
         /* Balloon Game Specific Styles */
+        .game-container {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .game-header {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+        }
+
         .balloon-game-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 8px;
+            flex: 1;
+            min-height: 0;
         }
 
         .game-stats {
             display: flex;
-            gap: 20px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -31,11 +46,12 @@
         .stat-box {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
+            gap: 6px;
+            padding: 8px 14px;
             background: white;
             border-radius: 50px;
             font-weight: 700;
+            font-size: 0.85rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
@@ -49,14 +65,29 @@
             color: #2563eb;
         }
 
+        .instruction-box {
+            padding: 10px 20px;
+            margin: 5px auto;
+        }
+
+        .instruction-text {
+            font-size: 1.2rem;
+        }
+
+        .instruction-target {
+            font-size: 1.8rem;
+        }
+
         #gameCanvas {
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             touch-action: none;
-            width: 100%;
+            flex: 1;
+            min-height: 0;
+            max-height: calc(100vh - 200px);
+            width: auto;
             max-width: 100%;
-            height: auto;
         }
 
         .start-overlay {
@@ -264,7 +295,7 @@
                 </div>
             </div>
 
-            <canvas id="gameCanvas" width="800" height="500"></canvas>
+            <canvas id="gameCanvas" width="400" height="600"></canvas>
         </div>
 
         <!-- Start Overlay -->

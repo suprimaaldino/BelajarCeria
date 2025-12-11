@@ -187,7 +187,7 @@ a {
 /* ---------- Header ---------- */
 .header {
     text-align: center;
-    padding: 40px 20px;
+    padding: 15px 10px;
     animation: slideDown 0.8s ease-out;
 }
 
@@ -212,7 +212,7 @@ a {
 }
 
 .logo-icon {
-    font-size: 4rem;
+    font-size: 2rem;
     animation: bounce 2s ease-in-out infinite;
 }
 
@@ -230,10 +230,10 @@ a {
 
 .logo-text {
     font-family: var(--font-display);
-    font-size: 3.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 
 .logo-belajar {
@@ -251,7 +251,7 @@ a {
 }
 
 .tagline {
-    font-size: 1.3rem;
+    font-size: 0.85rem;
     color: var(--text-medium);
     font-weight: 600;
     animation: fadeIn 1s ease-out 0.3s both;
@@ -272,11 +272,11 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
-    padding: 30px;
-    margin-bottom: 40px;
+    gap: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
     background: var(--bg-card);
-    border-radius: var(--radius-xl);
+    border-radius: 20px;
     box-shadow: var(--shadow-medium);
     animation: slideUp 0.8s ease-out 0.2s both;
 }
@@ -299,8 +299,8 @@ a {
 }
 
 .mascot-face {
-    width: 120px;
-    height: 120px;
+    width: 60px;
+    height: 60px;
     background: var(--gradient-candy);
     border-radius: 50%;
     display: flex;
@@ -384,23 +384,23 @@ a {
 
 /* ---------- Games Section ---------- */
 .games-section {
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .section-title {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.1rem;
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
     color: var(--text-dark);
 }
 
 .title-icon {
-    font-size: 2.2rem;
+    font-size: 1.3rem;
     animation: pulse 2s ease-in-out infinite;
 }
 
@@ -419,9 +419,9 @@ a {
 /* Games Grid */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 15px;
-    padding: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 8px;
 }
 
 /* Game Card */
@@ -515,14 +515,15 @@ a {
 }
 
 .card-content {
-    padding: 20px 15px;
+    padding: 12px 8px;
     position: relative;
     z-index: 2;
+    text-align: center;
 }
 
 .game-icon {
-    font-size: 2.8rem;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 6px;
     display: block;
     transition: transform var(--transition-medium);
 }
@@ -533,9 +534,9 @@ a {
 
 .game-title {
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     color: var(--text-dark);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .game-desc {
@@ -549,11 +550,11 @@ a {
 .game-badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-    padding: 6px 12px;
+    padding: 4px 8px;
     border-radius: var(--radius-full);
-    font-size: 0.75rem;
+    font-size: 0.6rem;
     font-weight: 600;
     color: var(--text-dark);
 }
@@ -623,71 +624,152 @@ a {
 
 /* ---------- Responsive Design ---------- */
 @media (max-width: 768px) {
-    .logo-text {
-        font-size: 2.5rem;
+    .header {
+        padding: 15px 10px;
+    }
+
+    .logo-container {
+        gap: 8px;
+        margin-bottom: 8px;
     }
 
     .logo-icon {
-        font-size: 3rem;
+        font-size: 2rem;
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+        gap: 5px;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
     }
 
     .welcome-section {
-        flex-direction: column;
-        text-align: center;
-        padding: 25px 20px;
+        flex-direction: row;
+        text-align: left;
+        padding: 15px;
+        margin-bottom: 15px;
+        gap: 15px;
     }
 
     .mascot-face {
-        width: 100px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .mascot-eyes {
+        gap: 12px;
+        margin-top: -5px;
+    }
+
+    .eye {
+        width: 15px;
+        height: 15px;
+    }
+
+    .pupil {
+        width: 8px;
+        height: 8px;
+    }
+
+    .mascot-mouth {
+        font-size: 1rem;
+        margin-top: 2px;
     }
 
     .welcome-text h2 {
-        font-size: 1.6rem;
+        font-size: 1.1rem;
+        margin-bottom: 4px;
     }
 
-    .games-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .welcome-text p {
+        font-size: 0.85rem;
     }
 
     .section-title {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .title-icon {
+        font-size: 1.4rem;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .app-container {
-        padding: 15px;
+        padding: 8px;
     }
 
     .header {
-        padding: 25px 15px;
+        padding: 10px 8px;
     }
 
-    .logo-container {
-        flex-direction: column;
-        gap: 10px;
+    .logo-icon {
+        font-size: 1.6rem;
     }
 
     .logo-text {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .tagline {
-        font-size: 1.1rem;
+        font-size: 0.8rem;
+    }
+
+    .welcome-section {
+        padding: 12px;
+        margin-bottom: 12px;
+        gap: 12px;
+        border-radius: 15px;
+    }
+
+    .mascot-face {
+        width: 50px;
+        height: 50px;
+    }
+
+    .welcome-text h2 {
+        font-size: 1rem;
+    }
+
+    .welcome-text p {
+        font-size: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .games-grid {
+        gap: 8px;
     }
 
     .card-content {
-        padding: 25px 20px;
+        padding: 12px 10px;
     }
 
     .game-icon {
-        font-size: 3rem;
+        font-size: 2rem;
+        margin-bottom: 6px;
     }
 
     .game-title {
-        font-size: 1.3rem;
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+
+    .game-badge {
+        padding: 4px 8px;
+        font-size: 0.65rem;
     }
 }
 

@@ -7,9 +7,9 @@
 
 // Game Configuration
 const CONFIG = {
-    CANVAS_WIDTH: 800,
-    CANVAS_HEIGHT: 500,
-    BALLOON_RADIUS: 45,
+    CANVAS_WIDTH: 400,
+    CANVAS_HEIGHT: 600,
+    BALLOON_RADIUS: 40,
     BALLOON_SPEED_MIN: 1,
     BALLOON_SPEED_MAX: 2,
     SPAWN_INTERVAL: 1500,
@@ -322,12 +322,24 @@ function initGame() {
 function resizeCanvas() {
     const container = BalloonGame.canvas.parentElement;
     const containerWidth = container.clientWidth || window.innerWidth - 20;
-    const maxWidth = Math.min(CONFIG.CANVAS_WIDTH, containerWidth);
-    const scale = maxWidth / CONFIG.CANVAS_WIDTH;
+
+    // Calculate available height
+    const availableHeight = Math.max(300, window.innerHeight - 200);
+
+    // Calculate dimensions maintaining aspect ratio
+    const aspectRatio = CONFIG.CANVAS_WIDTH / CONFIG.CANVAS_HEIGHT;
+    let canvasHeight = availableHeight;
+    let canvasWidth = canvasHeight * aspectRatio;
+
+    // If width exceeds container, constrain by width
+    if (canvasWidth > containerWidth) {
+        canvasWidth = containerWidth;
+        canvasHeight = canvasWidth / aspectRatio;
+    }
 
     // Update canvas display size
-    BalloonGame.canvas.style.width = `${maxWidth}px`;
-    BalloonGame.canvas.style.height = `${CONFIG.CANVAS_HEIGHT * scale}px`;
+    BalloonGame.canvas.style.width = `${canvasWidth}px`;
+    BalloonGame.canvas.style.height = `${canvasHeight}px`;
 }
 
 /**
