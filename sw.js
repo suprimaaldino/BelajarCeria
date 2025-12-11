@@ -3,7 +3,7 @@
  * Enables offline functionality for the educational games app
  */
 
-const CACHE_NAME = 'belajar-ceria-v2';
+const CACHE_NAME = 'belajar-ceria-v3';
 const OFFLINE_URL = '/index.html';
 
 // Files to cache for offline use
