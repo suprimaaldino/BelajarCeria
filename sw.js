@@ -3,7 +3,7 @@
  * Enables offline functionality for the educational games app
  */
 
-const CACHE_NAME = 'belajar-ceria-v1';
+const CACHE_NAME = 'belajar-ceria-v2';
 const OFFLINE_URL = '/index.html';
 
 // Files to cache for offline use
@@ -23,6 +23,12 @@ const STATIC_ASSETS = [
     '/games/hitung/hitung.js',
     '/games/roket/roket.html',
     '/games/roket/roket.js',
+    '/games/warna/warna.html',
+    '/games/warna/warna.js',
+    '/games/bentuk/bentuk.html',
+    '/games/bentuk/bentuk.js',
+    '/games/urut/urut.html',
+    '/games/urut/urut.js',
     '/icons/icon-192.svg',
     '/icons/icon-512.svg'
 ];
