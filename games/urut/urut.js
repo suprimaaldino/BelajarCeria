@@ -1,5 +1,5 @@
 /**
- * URUT ANGKA - Number Sequencing Game
+ * URUT ANGKA - Number Sequencing Game with Drag & Drop
  */
 
 const UrutGame = {
@@ -7,8 +7,8 @@ const UrutGame = {
     level: 1,
     streak: 0,
     numbers: [],
-    selectedTiles: [],
-    mode: 'ascending', // ascending or descending
+    mode: 'ascending',
+    draggedElement: null,
     elements: {}
 };
 
@@ -31,9 +31,6 @@ const UrutAudio = {
             osc.start(this.context.currentTime);
             osc.stop(this.context.currentTime + dur);
         } catch (e) { }
-    },
-    playSelect() {
-        this.playTone(440, 0.1);
     },
     playSwap() {
         this.playTone(523, 0.1);
@@ -72,8 +69,6 @@ function initGame() {
 }
 
 function startLevel() {
-    UrutGame.selectedTiles = [];
-
     // Determine number range and count based on level
     let maxNum, count;
     if (UrutGame.level === 1) {
@@ -92,9 +87,9 @@ function startLevel() {
 
     // Update instruction
     if (UrutGame.mode === 'ascending') {
-        UrutGame.elements.instructionText.textContent = 'Susun dari kecil ke besar! ⬆️';
+        UrutGame.elements.instructionText.textContent = 'Drag angka untuk menyusun dari kecil ke besar! ⬆️';
     } else {
-        UrutGame.elements.instructionText.textContent = 'Susun dari besar ke kecil! ⬇️';
+        UrutGame.elements.instructionText.textContent = 'Drag angka untuk menyusun dari besar ke kecil! ⬇️';
     }
 
     // Generate random unique numbers
@@ -107,61 +102,131 @@ function startLevel() {
 
     UrutGame.numbers = selectedNumbers;
 
-    // Create number tiles
+    // Create number tiles with drag & drop
     UrutGame.elements.numbersGrid.innerHTML = '';
     UrutGame.numbers.forEach((num, index) => {
         const tile = document.createElement('div');
         tile.className = 'number-tile';
         tile.textContent = num;
+        tile.draggable = true;
         tile.dataset.index = index;
-        tile.addEventListener('click', () => selectTile(index));
+
+        // Drag events
+        tile.addEventListener('dragstart', handleDragStart);
+        tile.addEventListener('dragend', handleDragEnd);
+        tile.addEventListener('dragover', handleDragOver);
+        tile.addEventListener('drop', handleDrop);
+
+        // Touch events for mobile
+        tile.addEventListener('touchstart', handleTouchStart, { passive: false });
+        tile.addEventListener('touchmove', handleTouchMove, { passive: false });
+        tile.addEventListener('touchend', handleTouchEnd);
+
         UrutGame.elements.numbersGrid.appendChild(tile);
     });
 
     updateDisplay();
 }
 
-function selectTile(index) {
-    const tiles = UrutGame.elements.numbersGrid.children;
-    const tile = tiles[index];
-
-    if (UrutGame.selectedTiles.includes(index)) {
-        // Deselect
-        UrutGame.selectedTiles = UrutGame.selectedTiles.filter(i => i !== index);
-        tile.classList.remove('selected');
-    } else {
-        if (UrutGame.selectedTiles.length < 2) {
-            // Select
-            UrutGame.selectedTiles.push(index);
-            tile.classList.add('selected');
-            UrutAudio.playSelect();
-
-            // If 2 tiles selected, swap them
-            if (UrutGame.selectedTiles.length === 2) {
-                setTimeout(() => swapTiles(), 300);
-            }
-        }
-    }
+// Drag & Drop handlers
+function handleDragStart(e) {
+    UrutGame.draggedElement = e.target;
+    e.target.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
 }
 
-function swapTiles() {
-    const [index1, index2] = UrutGame.selectedTiles;
+function handleDragEnd(e) {
+    e.target.classList.remove('dragging');
+}
 
-    // Swap in array
-    [UrutGame.numbers[index1], UrutGame.numbers[index2]] =
-        [UrutGame.numbers[index2], UrutGame.numbers[index1]];
+function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+}
 
-    // Update UI
-    const tiles = UrutGame.elements.numbersGrid.children;
-    tiles[index1].textContent = UrutGame.numbers[index1];
-    tiles[index2].textContent = UrutGame.numbers[index2];
+function handleDrop(e) {
+    e.preventDefault();
 
-    // Remove selection
-    tiles[index1].classList.remove('selected');
-    tiles[index2].classList.remove('selected');
+    if (!UrutGame.draggedElement) return;
 
-    UrutGame.selectedTiles = [];
-    UrutAudio.playSwap();
+    const dropTarget = e.target;
+    if (dropTarget.classList.contains('number-tile') && dropTarget !== UrutGame.draggedElement) {
+        // Swap positions
+        const draggedIndex = parseInt(UrutGame.draggedElement.dataset.index);
+        const targetIndex = parseInt(dropTarget.dataset.index);
+
+        // Swap in array
+        [UrutGame.numbers[draggedIndex], UrutGame.numbers[targetIndex]] =
+            [UrutGame.numbers[targetIndex], UrutGame.numbers[draggedIndex]];
+
+        // Update UI
+        UrutGame.draggedElement.textContent = UrutGame.numbers[draggedIndex];
+        dropTarget.textContent = UrutGame.numbers[targetIndex];
+
+        UrutAudio.playSwap();
+    }
+
+    UrutGame.draggedElement = null;
+}
+
+// Touch support for mobile
+let touchElement, touchClone, touchStartX, touchStartY;
+
+function handleTouchStart(e) {
+    e.preventDefault();
+    touchElement = e.target;
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+
+    // Create visual clone
+    touchClone = touchElement.cloneNode(true);
+    touchClone.style.position = 'fixed';
+    touchClone.style.pointerEvents = 'none';
+    touchClone.style.zIndex = '9999';
+    touchClone.style.opacity = '0.8';
+    touchClone.style.width = touchElement.offsetWidth + 'px';
+    touchClone.style.height = touchElement.offsetHeight + 'px';
+    touchClone.style.left = touch.clientX - touchElement.offsetWidth / 2 + 'px';
+    touchClone.style.top = touch.clientY - touchElement.offsetHeight / 2 + 'px';
+    document.body.appendChild(touchClone);
+
+    touchElement.style.opacity = '0.3';
+}
+
+function handleTouchMove(e) {
+    e.preventDefault();
+    if (!touchClone) return;
+
+    const touch = e.touches[0];
+    touchClone.style.left = touch.clientX - touchClone.offsetWidth / 2 + 'px';
+    touchClone.style.top = touch.clientY - touchClone.offsetHeight / 2 + 'px';
+}
+
+function handleTouchEnd(e) {
+    if (!touchClone) return;
+
+    const touch = e.changedTouches[0];
+    const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    if (dropTarget && dropTarget.classList.contains('number-tile') && dropTarget !== touchElement) {
+        const draggedIndex = parseInt(touchElement.dataset.index);
+        const targetIndex = parseInt(dropTarget.dataset.index);
+
+        // Swap in array
+        [UrutGame.numbers[draggedIndex], UrutGame.numbers[targetIndex]] =
+            [UrutGame.numbers[targetIndex], UrutGame.numbers[draggedIndex]];
+
+        // Update UI
+        touchElement.textContent = UrutGame.numbers[draggedIndex];
+        dropTarget.textContent = UrutGame.numbers[targetIndex];
+
+        UrutAudio.playSwap();
+    }
+
+    touchClone.remove();
+    touchClone = null;
+    touchElement.style.opacity = '1';
 }
 
 function checkOrder() {
@@ -170,7 +235,6 @@ function checkOrder() {
         : isDescending(UrutGame.numbers);
 
     if (isCorrect) {
-        // Correct!
         UrutAudio.playCorrect();
         UrutGame.score += 20;
         UrutGame.streak++;
@@ -184,13 +248,11 @@ function checkOrder() {
             }, i * 100);
         });
 
-        // Show success modal
         UrutGame.elements.levelScore.textContent = UrutGame.score;
         setTimeout(() => {
             UrutGame.elements.successModal.classList.add('active');
         }, 1000);
     } else {
-        // Wrong
         UrutAudio.playWrong();
         UrutGame.streak = 0;
         updateDisplay();

@@ -103,11 +103,10 @@ function generateQuestion() {
     WarnaGame.elements.colorDisplay.style.background = colorData.hex;
     WarnaGame.elements.colorDisplay.textContent = colorData.emoji;
 
-    // Generate options (3-4 based on level)
-    const numOptions = WarnaGame.level <= 2 ? 3 : 4;
+    // Generate 4 options
     const options = [correctColor];
 
-    while (options.length < numOptions) {
+    while (options.length < 4) {
         const randomColor = colorNames[Math.floor(Math.random() * colorNames.length)];
         if (!options.includes(randomColor)) {
             options.push(randomColor);
@@ -117,13 +116,15 @@ function generateQuestion() {
     // Shuffle options
     options.sort(() => Math.random() - 0.5);
 
-    // Create buttons
+    // Create buttons with white background and colored text
     WarnaGame.elements.colorOptions.innerHTML = '';
     options.forEach(colorName => {
         const btn = document.createElement('button');
         btn.className = 'color-btn';
         btn.textContent = colorName;
-        btn.style.background = COLORS[colorName].hex;
+        btn.style.background = 'white';
+        btn.style.color = COLORS[colorName].hex;
+        btn.style.borderColor = COLORS[colorName].hex;
         btn.addEventListener('click', () => checkAnswer(colorName, btn));
         WarnaGame.elements.colorOptions.appendChild(btn);
     });

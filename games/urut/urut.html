@@ -50,21 +50,24 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border-radius: 15px;
-            cursor: pointer;
+            cursor: grab;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             user-select: none;
         }
 
+        .number-tile:active {
+            cursor: grabbing;
+        }
+
+        .number-tile.dragging {
+            opacity: 0.5;
+            transform: scale(1.05);
+        }
+
         .number-tile:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-        }
-
-        .number-tile.selected {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            transform: scale(1.1);
-            box-shadow: 0 0 0 4px #fbbf24;
         }
 
         .number-tile.correct {
@@ -157,7 +160,7 @@
                 <div class="stat-box"><span>🔥</span>Streak: <span id="streak">0</span></div>
             </div>
 
-            <p class="instruction-text" id="instructionText">Tap 2 angka untuk menukar posisi!</p>
+            <p class="instruction-text" id="instructionText">Drag angka untuk menyusun!</p>
 
             <div class="numbers-grid" id="numbersGrid"></div>
 
