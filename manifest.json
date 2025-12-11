@@ -6,7 +6,7 @@
     "display": "standalone",
     "background_color": "#ffecd2",
     "theme_color": "#8b5cf6",
-    "orientation": "any",
+    "orientation": "portrait",
     "categories": [
         "education",
         "games",
